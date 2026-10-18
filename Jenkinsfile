@@ -24,5 +24,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Image Build') {
+            steps {
+                sshagent(credentials: ['docker3-ssh']) {
+                    bat 'ssh -o BatchMode=yes -o StrictHostKeyChecking=yes jenkins@10.34.41.3 docker version'
+                }
+            }
+        }
     }
 }
