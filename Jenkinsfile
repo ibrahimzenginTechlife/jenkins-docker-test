@@ -41,8 +41,6 @@ pipeline {
                 }
             }
         }
-    }
-}
 
         stage('Docker Container Baslat') {
             steps {
@@ -51,6 +49,5 @@ pipeline {
                 }
             }
         }
-
-    } // stages kapanisi
-} // pipeline kapanisi
+    }
+}
