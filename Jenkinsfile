@@ -8,5 +8,13 @@ pipeline {
                 echo 'GitHub baglantisi basarili!'
             }
         }
+
+        stage('Linux SSH Test') {
+            steps {
+                sshagent(credentials: ['docker3-ssh']) {
+                    bat 'ssh -o BatchMode=yes -o StrictHostKeyChecking=yes jenkins@10.34.41.3 whoami'
+                }
+            }
+        }
     }
 }
