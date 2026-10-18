@@ -32,5 +32,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Dosyalari Linux Sunucuya Aktar') {
+            steps {
+                sshagent(credentials: ['docker3-ssh']) {
+                    bat 'scp -o BatchMode=yes -o StrictHostKeyChecking=yes Dockerfile index.html jenkins@10.34.41.3:/home/jenkins/jenkins-docker-test/'
+                }
+            }
+        }
     }
 }
