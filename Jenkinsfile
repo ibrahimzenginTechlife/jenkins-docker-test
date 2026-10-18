@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -25,18 +26,18 @@ pipeline {
             }
         }
 
-        stage('Docker Image Build') {
-            steps {
-                sshagent(credentials: ['docker3-ssh']) {
-                    bat 'ssh -o BatchMode=yes -o StrictHostKeyChecking=yes jenkins@10.34.41.3 docker version'
-                }
-            }
-        }
-
         stage('Dosyalari Linux Sunucuya Aktar') {
             steps {
                 sshagent(credentials: ['docker3-ssh']) {
                     bat 'scp -o BatchMode=yes -o StrictHostKeyChecking=yes Dockerfile index.html jenkins@10.34.41.3:/home/jenkins/jenkins-docker-test/'
+                }
+            }
+        }
+
+        stage('Docker Image Build') {
+            steps {
+                sshagent(credentials: ['docker3-ssh']) {
+                    bat 'ssh -o BatchMode=yes -o StrictHostKeyChecking=yes jenkins@10.34.41.3 docker build -t jenkins-docker-test:1.0 /home/jenkins/jenkins-docker-test'
                 }
             }
         }
